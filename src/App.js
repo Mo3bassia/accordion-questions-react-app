@@ -33,22 +33,24 @@ function Accordion() {
 }
 
 function Item() {
-  const [selected, setSelected] = useState();
+  const [open, setOpen] = useState([]);
 
   return (
     <>
       {faqs.map((faq, index) => (
         <div
-          className={`item ${index === selected ? "open" : ""}`}
+          className={`item ${open.includes(index) ? "open" : ""}`}
           key={index + 1}
           onClick={() =>
-            index !== selected ? setSelected(index) : setSelected()
+            open.filter((i) => i === index).length != 0
+              ? setOpen(open.filter((i) => i !== index))
+              : setOpen([...open, index])
           }
         >
           <div className="number">0{index + 1}</div>
           <div className="title">{faq.title}</div>
-          <div className="icon">{index === selected ? "-" : "+"}</div>
-          {index === selected ? (
+          <div className="icon">{open.includes(index) ? "-" : "+"}</div>
+          {open.includes(index) ? (
             <div className="content-box">{faq.text}</div>
           ) : null}
         </div>
