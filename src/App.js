@@ -27,32 +27,32 @@ export default function App() {
 function Accordion() {
   return (
     <div className="accordion">
-      <Item />
+      {faqs.map((faq, index) => (
+        <Item index={index} faq={faq} key={index} />
+      ))}
     </div>
   );
 }
 
-function Item() {
+function Item({ faq, index }) {
   const [selected, setSelected] = useState();
 
   return (
     <>
-      {faqs.map((faq, index) => (
-        <div
-          className={`item ${index === selected ? "open" : ""}`}
-          key={index + 1}
-          onClick={() =>
-            index !== selected ? setSelected(index) : setSelected()
-          }
-        >
-          <div className="number">0{index + 1}</div>
-          <div className="title">{faq.title}</div>
-          <div className="icon">{index === selected ? "-" : "+"}</div>
-          {index === selected ? (
-            <div className="content-box">{faq.text}</div>
-          ) : null}
-        </div>
-      ))}
+      <div
+        className={`item ${index === selected ? "open" : ""}`}
+        key={index + 1}
+        onClick={() =>
+          index !== selected ? setSelected(index) : setSelected()
+        }
+      >
+        <div className="number">0{index + 1}</div>
+        <div className="title">{faq.title}</div>
+        <div className="icon">{index === selected ? "-" : "+"}</div>
+        {index === selected ? (
+          <div className="content-box">{faq.text}</div>
+        ) : null}
+      </div>
     </>
   );
 }
