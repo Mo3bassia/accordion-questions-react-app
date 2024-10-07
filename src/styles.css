@@ -20,6 +20,13 @@ body {
   display: flex;
   flex-direction: column;
   gap: 24px;
+  min-width: 700px;
+}
+
+@media (max-width: 750px) {
+  .accordion {
+    min-width: unset;
+  }
 }
 
 .item {
