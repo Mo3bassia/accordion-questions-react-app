@@ -25,18 +25,23 @@ export default function App() {
 }
 
 function Accordion() {
+  const [selected, setSelected] = useState();
   return (
     <div className="accordion">
       {faqs.map((faq, index) => (
-        <Item index={index} faq={faq} key={index} />
+        <Item
+          index={index}
+          faq={faq}
+          key={index}
+          selected={selected}
+          setSelected={setSelected}
+        />
       ))}
     </div>
   );
 }
 
-function Item({ faq, index }) {
-  const [selected, setSelected] = useState();
-
+function Item({ faq, index, selected, setSelected }) {
   return (
     <>
       <div
